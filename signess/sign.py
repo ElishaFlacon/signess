@@ -1,0 +1,3 @@
+class SearchSign():
+    pass
+

@@ -1,0 +1,3 @@
+
+class SearchPerson():
+    pass
