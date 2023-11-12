@@ -22,7 +22,7 @@ class Dataset(ProcessingAutograph):
     def generate(self, path: str) -> str:
         """
         Метод для генерации датасета
-            - path - путь для сохранения датасета
+            - path - путь для загрузки документов
 
         Возвращает путь сохранения датасета
         """

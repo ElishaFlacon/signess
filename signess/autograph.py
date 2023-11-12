@@ -14,6 +14,6 @@ class ProcessingAutograph():
     def __processing(self, path: str) -> None:
         """
         Метод для получения подписей из документов
-            - path - путь сохранения обработанных подписей
+            - path - путь для загрузки документов
         """
         self.__document.get_authoraphs(path, self.__autograph)
