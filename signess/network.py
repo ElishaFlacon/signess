@@ -22,7 +22,10 @@ class FedotCNN():
 
     def __pipeline(self, composite_flag: bool = True) -> Pipeline:
         """
+        Приватный метод для создания структуры нейронной сети, принимает:
+            - composite_flag -
 
+        Возвращает Pipeline из Fedot
         """
 
         node_first = PipelineNode('cnn')
@@ -51,7 +54,10 @@ class FedotCNN():
 
     def load_dataset(self, path: str) -> InputData:
         """
+        Метод для загрузки датасета, принимает:
+            - path - путь до датасет файла .npz 
 
+        Возвращает InputData из Fedot
         """
 
         with np.load(path) as data:
@@ -68,21 +74,30 @@ class FedotCNN():
 
     def train(self, dataset: InputData, num_epochs: int) -> None:
         """
+        Метод для тренировки модели, принимает:
+            - dataset - датасет в виде InputData, который можно получить из метода load_dataset
+            - num_epochs - количество эпох для обучения модели
 
+        Возвращает None
         """
 
         self.__model.fit(input_data=dataset, n_jobs=num_epochs)
 
     def blunt(self) -> None:
         """
+        Метод для сброса обучения у модели
 
+        Возвращает None
         """
 
         self.__model.unfit()
 
-    def accuracy(self, dataset: any) -> OutputData:
+    def accuracy(self, dataset: InputData) -> OutputData:
         """
+        Метод для проверки точности модели, принимает:
+            - dataset - датасет в виде InputData, который можно получить из метода load_dataset
 
+        Возвращает OutputData из Fedot, в котором находятся данные о точности модели
         """
 
         self.__check_train()
@@ -92,7 +107,11 @@ class FedotCNN():
 
     def classify(self, path_to_picture: str, path_to_dataset: str) -> np.ndarray:
         """
+        Метод для классификации изображения, принимает:
+            - path_to_picture - путь до изображения, которое нужно классифицировать
+            - path_to_dataset - путь до датасет файла .npz (это нужно для получения количества классов)
 
+        Возвращает ndarray из numpy, в котором находятся данные о классификации
         """
 
         self.__check_train()
@@ -116,14 +135,20 @@ class FedotCNN():
 
     def save(self, path: str) -> None:
         """
+        Метод для сохранения модели, принимает:
+            - path - путь для сохранения модели
 
+        Возвращает None
         """
 
         self.__model.save(path=path, create_subdir=False)
 
     def load(self, path: str) -> None:
         """
+        Метод для загрузки модели, принимает:
+            - path - путь до сохраненной модели
 
+        Возвращает None
         """
 
         self.__model = Pipeline().load(path)
