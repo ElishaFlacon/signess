@@ -1,10 +1,14 @@
 .idea
 .venv
 .vscode
-
 __pycache__
 
-main.py
-result
-data
+
+# для игнорирования файлов бибилиотеки
+dist
 *.egg-signess
+
+
+# любые файлы для тестирования помечаются .dev. а директории .dev
+*.dev.*
+*.dev
