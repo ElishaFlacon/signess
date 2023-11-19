@@ -1,4 +1,3 @@
-from io import open
 from setuptools import setup, find_packages
 from pathlib import Path
 
@@ -44,7 +43,7 @@ setup(
 
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['reepsy', 'inskrib', 'fedot[extra]'],
+    install_requires=['fedot[extra]', 'inskrib'],
 
     classifiers=[
         'License :: OSI Approved :: BSD License',
