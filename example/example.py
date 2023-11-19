@@ -1,36 +1,74 @@
 from signess.dataset import Dataset
-from signess.networks.reepsy import ReepsyCNN
+from signess.network import FedotCNN
 
 from inskrib.autograph import Autograph
 from inskrib.documents import Document
 
+from fedot.core.utils import set_random_seed
 
-# конфиг
-path_to_docs = './docs'
-path_to_autographs = './dataset/autographs'
-path_to_csv = './dataset/filenames.csv'
-path_to_picture = './example/picture.png'
 
-# создали инстанс класса датасет, в котором указали какой датасет нам нужен
-dataset = Dataset(
-    autograph=Autograph(size=(360, 360)),
-    document=Document(),
-    base="reepsy"
-)
+def create_dataset(path_to_data):
+    # create Dataet class
+    ds = Dataset(
+        autograph=Autograph(size=(380, 380)),
+        document=Document()
+    )
 
-# генерация датасета из директории с документами
-dataset.generate(path=path_to_docs)
+    # generate dataset by .npz file
+    path_to_dataset = ds.generate(path=path_to_data)
+    return path_to_dataset
 
-# создали инстанс необученной нейронной сети
-network = ReepsyCNN()
 
-# полный пайплайн обучения модели
-(model, accuracy, dataset) = network.process(
-    data=path_to_autographs,
-    csv=path_to_csv,
-    num_epochs=3
-)
+def create_network(path_to_dataset, path_to_picture, path_to_save):
+    # create Network
+    network = FedotCNN()
+    # load dataset where path - path to .npz file
+    dataset = network.load_dataset(path=path_to_dataset)
+    # train model with loaded dataset by 3 epochs
+    network.train(dataset=dataset, num_epochs=3)
 
-# классифицируем изображение
-predict = network.classify(model, path_to_picture)
-print(f'Predict: {predict}')
+    # check accuracy
+    accuracy = network.accuracy(dataset)
+    print(f'Accuracy: {accuracy}')
+
+    # classify picture
+    predict = network.classify(path_to_picture, path_to_dataset)
+    print(f'Classify: {predict}')
+
+    # save model
+    network.save(path_to_save)
+    print('Model Save!')
+
+    return (accuracy, predict)
+
+
+def load_network(path_to_dataset, path_to_picture, path_to_load):
+    # create new Networ
+    new_network = FedotCNN()
+    # load model
+    new_network.load(path_to_load)
+    # load dataset where path - path to .npz file
+    dataset = new_network.load_dataset(path=path_to_dataset)
+
+    # check accuracy on new model
+    accuracy = new_network.accuracy(dataset)
+    print(f'Accuracy: {accuracy}')
+
+    # classify picture on new model
+    predict = new_network.classify(path_to_picture, path_to_dataset)
+    print(f'Classify: {predict}')
+
+    return (accuracy, predict)
+
+
+if __name__ == '__main__':
+    set_random_seed(1)
+
+    # config
+    path_to_data = './docs'
+    path_to_picture = './result/autographs/0-first_person-0.png'
+    path_to_save_and_load = './model'
+
+    path_to_dataset = create_dataset(path_to_data)
+    create_network(path_to_dataset, path_to_picture, path_to_save_and_load)
+    load_network(path_to_dataset, path_to_picture, path_to_save_and_load)
