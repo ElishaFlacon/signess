@@ -23,7 +23,7 @@ class FedotCNN():
     def __pipeline(self, composite_flag: bool = True) -> Pipeline:
         """
         Приватный метод для создания структуры нейронной сети, принимает:
-            - composite_flag -
+            - composite_flag
 
         Возвращает Pipeline из Fedot
         """
@@ -92,9 +92,9 @@ class FedotCNN():
 
         self.__model.unfit()
 
-    def accuracy(self, dataset: InputData) -> OutputData:
+    def predict(self, dataset: InputData) -> OutputData:
         """
-        Метод для проверки точности модели, принимает:
+        Метод для предсказывания ответов на основе загруженных данных, принимает (должен использоваться для подсчета точности):
             - dataset - датасет в виде InputData, который можно получить из метода load_dataset
 
         Возвращает OutputData из Fedot, в котором находятся данные о точности модели
@@ -111,7 +111,7 @@ class FedotCNN():
             - path_to_picture - путь до изображения, которое нужно классифицировать
             - path_to_dataset - путь до датасет файла .npz (это нужно для получения количества классов)
 
-        Возвращает ndarray из numpy, в котором находятся данные о классификации
+        Возвращает ndarray из numpy, массив вероятностей, где индекс массива это человек из person.csv, а значение в этом индексе это вероятность, что именно этот человек является владельцем подписи
         """
 
         self.__check_train()
