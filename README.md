@@ -46,6 +46,7 @@
 </h2>
 
 - Пример использования - <a href="https://github.com/ElishaFlacon/signess/tree/main/example/">example</a>
+- Пример использования в реальном проекте - <a href="https://github.com/ElishaFlacon/signess-app/">example</a>
 
 
 
