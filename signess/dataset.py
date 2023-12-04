@@ -9,14 +9,9 @@ from inskrib.documents import Document
 class Dataset():
     """
 
-    Класс для автоматического сбора датасета под каждую нейронную сеть
+    Класс для автоматического сбора датасета
         - autograph - инстанс класса inskrib.Autograph
         - document - инстанс класса inskrib.Document
-        - base - для какой нейронной сети будет генерироваться датасет:
-            - "reepsy" 
-            - "fedot"
-
-    Также наследует класс ProcessingAutograph
 
     """
 
@@ -24,18 +19,14 @@ class Dataset():
         self.__document = document
         self.__autograph = autograph
 
-    def generate(self, path: str) -> str:
+    def package(self,  path_to_files: str, path_to_save: str) -> str:
         """
-        Метод для генерации датасета
-            - path - путь для загрузки документов
+        Метод для сборки готового датасета в .npz формат
+            - path_to_files - путь к директории с изображениями
+            - path_to_save - путь сохранения .npz файла
 
         Возвращает путь сохранения датасета
         """
-        self.__document.get_authoraphs(path, self.__autograph)
-
-        path_to_files = "./result/autographs/"
-        path_to_save = "./result/dataset.npz"
-
         vectorized_images_x = []
         vectorized_images_y = []
 
@@ -52,5 +43,20 @@ class Dataset():
             DataX=vectorized_images_x,
             DataY=vectorized_images_y
         )
+
+        return path_to_save
+
+    def generate(self, path: str) -> str:
+        """
+        Метод для генерации датасета
+            - path - путь для загрузки документов
+
+        Возвращает путь сохранения датасета
+        """
+        path_to_files = "./result/autographs/"
+        path_to_save = "./result/dataset.npz"
+
+        self.__document.get_authoraphs(path, self.__autograph)
+        path_to_save = self.package(path_to_files, path_to_save)
 
         return path_to_save
