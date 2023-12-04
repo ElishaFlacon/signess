@@ -9,7 +9,7 @@ from pathlib import Path
 """
 
 
-VERSION = '0.0.1.1'
+VERSION = '0.0.1.2'
 NAME = 'signess'
 
 HERE = Path(__file__).parent.resolve()
