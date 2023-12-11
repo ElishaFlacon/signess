@@ -64,7 +64,7 @@ if __name__ == '__main__':
     set_random_seed(1)
 
     # config
-    path_to_data = './example/docs'
+    path_to_data = './example/dataset/mini'
     path_to_picture = './result/autographs/0-first_person-0.png'
     path_to_save_and_load = './model'
 
