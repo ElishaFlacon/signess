@@ -11,7 +11,7 @@ from fedot.core.data.data import InputData, OutputData
 
 
 def create_dataset():
-    path_to_data = "./example/docs"
+    path_to_data = './example/datasets/mini'
 
     dataset = Dataset(Autograph(), Document())
     path_to_dataset = dataset.generate(path_to_data)

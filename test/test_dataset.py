@@ -5,7 +5,7 @@ from inskrib.documents import Document
 
 
 def test_dataset():
-    path_to_data = './example/docs'
+    path_to_data = './example/datasets/mini'
     path_to_save = "./result/dataset.npz"
 
     autograph = Autograph()
