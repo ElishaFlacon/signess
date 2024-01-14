@@ -65,7 +65,7 @@ if __name__ == '__main__':
 
     # config
     path_to_data = './example/datasets/mini'
-    path_to_picture = './result/autographs/0-first_person-0.png'
+    path_to_picture = './result/autographs/1-first_person-0.png'
     path_to_save_and_load = './model'
 
     path_to_dataset = create_dataset(path_to_data)
