@@ -45,9 +45,9 @@
  📺 Демо:
 </h2>
 
-- Пример использования - <a href="https://github.com/ElishaFlacon/signess/tree/main/example/">example</a>
-- Пример использования в реальном проекте - <a href="https://github.com/ElishaFlacon/signess-app/">example</a>
-
+- Пример использования - <a href="https://github.com/ElishaFlacon/signess/tree/main/example">example</a>
+- Пример использования в реальном проекте - <a href="https://github.com/ElishaFlacon/signess-app">example</a>
+- <a href="https://colab.research.google.com/drive/1y3O0GpI3eiRyukHsi1wMb7GeCacmVfMA">Google Colab</a>
 
 
 </br>
